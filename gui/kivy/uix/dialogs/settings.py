@@ -3,22 +3,22 @@ from kivy.factory import Factory
 from kivy.properties import ObjectProperty
 from kivy.lang import Builder
 
-from electrum_dash.util import base_units
-from electrum_dash.i18n import languages
-from electrum_dash_gui.kivy.i18n import _
-from electrum_dash.plugins import run_hook
-from electrum_dash import coinchooser
-from electrum_dash.util import fee_levels
+from electrum_reden.util import base_units
+from electrum_reden.i18n import languages
+from electrum_reden_gui.kivy.i18n import _
+from electrum_reden.plugins import run_hook
+from electrum_reden import coinchooser
+from electrum_reden.util import fee_levels
 
 from .choice_dialog import ChoiceDialog
 
 Builder.load_string('''
 #:import partial functools.partial
-#:import _ electrum_dash_gui.kivy.i18n._
+#:import _ electrum_reden_gui.kivy.i18n._
 
 <SettingsDialog@Popup>
     id: settings
-    title: _('Electrum-DASH Settings')
+    title: _('Electrum-REDEN Settings')
     disable_pin: False
     use_encryption: False
     BoxLayout:
@@ -46,13 +46,13 @@ Builder.load_string('''
                 SettingsItem:
                     bu: app.base_unit
                     title: _('Denomination') + ': ' + self.bu
-                    description: _("Base unit for Dash amounts.")
+                    description: _("Base unit for Reden amounts.")
                     action: partial(root.unit_dialog, self)
                 CardSeparator
                 SettingsItem:
                     status: root.fee_status()
                     title: _('Fees') + ': ' + self.status
-                    description: _("Fees paid to the Dash miners.")
+                    description: _("Fees paid to the Reden miners.")
                     action: partial(root.fee_dialog, self)
                 CardSeparator
                 SettingsItem:

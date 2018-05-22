@@ -6,18 +6,18 @@ if [[ -z $TRAVIS_TAG ]]; then
   exit 1
 fi
 
-BUILD_REPO_URL=https://github.com/akhavr/electrum-dash.git
+BUILD_REPO_URL=https://github.com/akhavr/electrum-reden.git
 
 cd build
 
-git clone --branch $TRAVIS_TAG $BUILD_REPO_URL electrum-dash
+git clone --branch $TRAVIS_TAG $BUILD_REPO_URL electrum-reden
 
-cd electrum-dash
+cd electrum-reden
 
 export PY36BINDIR=/Library/Frameworks/Python.framework/Versions/3.6/bin/
 export PATH=$PATH:$PY36BINDIR
-source ./contrib/travis/electrum_dash_version_env.sh;
-echo wine build version is $ELECTRUM_DASH_VERSION
+source ./contrib/travis/electrum_reden_version_env.sh;
+echo wine build version is $ELECTRUM_REDEN_VERSION
 
 sudo pip3 install -r contrib/requirements.txt
 sudo pip3 install \
@@ -39,9 +39,9 @@ cp contrib/pyi_tctl_runtimehook.py .
 
 pyinstaller \
     -y \
-    --name electrum-dash-$ELECTRUM_DASH_VERSION.bin \
+    --name electrum-reden-$ELECTRUM_REDEN_VERSION.bin \
     osx.spec
 
-sudo hdiutil create -fs HFS+ -volname "Electrum-DASH" \
-    -srcfolder dist/Electrum-DASH.app \
-    dist/electrum-dash-$ELECTRUM_DASH_VERSION-macosx.dmg
+sudo hdiutil create -fs HFS+ -volname "Electrum-REDEN" \
+    -srcfolder dist/Electrum-REDEN.app \
+    dist/electrum-reden-$ELECTRUM_REDEN_VERSION-macosx.dmg

@@ -1,7 +1,7 @@
-Index: Electrum-DASH-3.0.6/lib/util.py
+Index: Electrum-REDEN-3.0.6/lib/util.py
 ===================================================================
---- Electrum-DASH-3.0.6.orig/lib/util.py	2018-05-11 11:06:15.000000000 +0300
-+++ Electrum-DASH-3.0.6/lib/util.py	2018-05-11 11:46:25.197338884 +0300
+--- Electrum-REDEN-3.0.6.orig/lib/util.py	2018-05-11 11:06:15.000000000 +0300
++++ Electrum-REDEN-3.0.6/lib/util.py	2018-05-11 11:46:25.197338884 +0300
 @@ -354,7 +354,7 @@
          return 'unknown'
      x = int(x)  # Some callers pass Decimal

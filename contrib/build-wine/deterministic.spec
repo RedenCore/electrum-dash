@@ -35,18 +35,18 @@ hiddenimports = [
 ]
 
 datas = [
-    ('lib/servers.json', 'electrum_dash'),
-    ('lib/servers_testnet.json', 'electrum_dash'),
-    ('lib/currencies.json', 'electrum_dash'),
-    ('lib/locale', 'electrum_dash/locale'),
-    ('lib/wordlist', 'electrum_dash/wordlist'),
+    ('lib/servers.json', 'electrum_reden'),
+    ('lib/servers_testnet.json', 'electrum_reden'),
+    ('lib/currencies.json', 'electrum_reden'),
+    ('lib/locale', 'electrum_reden/locale'),
+    ('lib/wordlist', 'electrum_reden/wordlist'),
 ]
 
 # https://github.com/pyinstaller/pyinstaller/wiki/Recipe-remove-tkinter-tcl
 sys.modules['FixTk'] = None
 excludes = ['FixTk', 'tcl', 'tk', '_tkinter', 'tkinter', 'Tkinter']
 
-a = Analysis(['electrum-dash'],
+a = Analysis(['electrum-reden'],
              pathex=['plugins'],
              hiddenimports=hiddenimports,
              datas=datas,
@@ -59,14 +59,14 @@ for d in a.datas:
         a.datas.remove(d)
         break
 
-# Add TOC to electrum_dash, electrum_dash_gui, electrum_dash_plugins
+# Add TOC to electrum_reden, electrum_reden_gui, electrum_reden_plugins
 for p in sorted(a.pure):
     if p[0].startswith('lib') and p[2] == 'PYMODULE':
-        a.pure += [('electrum_dash%s' % p[0][3:] , p[1], p[2])]
+        a.pure += [('electrum_reden%s' % p[0][3:] , p[1], p[2])]
     if p[0].startswith('gui') and p[2] == 'PYMODULE':
-        a.pure += [('electrum_dash_gui%s' % p[0][3:] , p[1], p[2])]
+        a.pure += [('electrum_reden_gui%s' % p[0][3:] , p[1], p[2])]
     if p[0].startswith('plugins') and p[2] == 'PYMODULE':
-        a.pure += [('electrum_dash_plugins%s' % p[0][7:] , p[1], p[2])]
+        a.pure += [('electrum_reden_plugins%s' % p[0][7:] , p[1], p[2])]
 
 pyz = PYZ(a.pure)
 
@@ -77,7 +77,7 @@ exe = EXE(pyz,
           strip=False,
           upx=False,
           console=False,
-          icon='icons/electrum-dash.ico',
+          icon='icons/electrum-reden.ico',
           name=os.path.join('build\\pyi.win32\\electrum', cmdline_name))
 
 # exe with console output
@@ -88,7 +88,7 @@ conexe = EXE(pyz,
           strip=False,
           upx=False,
           console=True,
-          icon='icons/electrum-dash.ico',
+          icon='icons/electrum-reden.ico',
           name=os.path.join('build\\pyi.win32\\electrum',
                             'console-%s' % cmdline_name))
 
@@ -114,4 +114,4 @@ coll = COLLECT(exe, conexe, tctl_exe,
                a.datas,
                strip=False,
                upx=False,
-               name=os.path.join('dist', 'electrum-dash'))
+               name=os.path.join('dist', 'electrum-reden'))

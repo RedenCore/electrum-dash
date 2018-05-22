@@ -10,7 +10,7 @@ if platform != 'android':
     raise ImportError
 import threading
 
-from electrum_dash_gui.kivy.nfc_scanner import NFCBase
+from electrum_reden_gui.kivy.nfc_scanner import NFCBase
 from jnius import autoclass, cast
 from android.runnable import run_on_ui_thread
 from android import activity
@@ -165,20 +165,20 @@ class ScannerAndroid(NFCBase):
     def create_AAR(self):
         '''Create the record responsible for linking our application to the tag.
         '''
-        return NdefRecord.createApplicationRecord(JString("org.dash.electrum.kivy"))
+        return NdefRecord.createApplicationRecord(JString("org.reden.electrum.kivy"))
 
     def create_TNF_EXTERNAL(self, data):
         '''Create our actual payload record.
         '''
         if BUILDVERSION >= 14:
-            domain = "org.dash.electrum"
+            domain = "org.reden.electrum"
             stype = "externalType"
             extRecord = NdefRecord.createExternal(domain, stype, data)
         else:
             # Creating the NdefRecord manually:
             extRecord = NdefRecord(
                 NdefRecord.TNF_EXTERNAL_TYPE,
-                "org.dash.electrum:externalType",
+                "org.reden.electrum:externalType",
                 '',
                 data)
         return extRecord
@@ -213,7 +213,7 @@ class ScannerAndroid(NFCBase):
         # Create record
         ndef_record = NdefRecord(
                 NdefRecord.TNF_MIME_MEDIA,
-                'org.dash.electrum.kivy', '', data)
+                'org.reden.electrum.kivy', '', data)
         
         # Create message
         ndef_message = NdefMessage([ndef_record])

@@ -1,6 +1,6 @@
 Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
-Upstream-Name: electrum-dash
-Source: https://github.com/akhavr/electrum-dash/
+Upstream-Name: electrum-reden
+Source: https://github.com/akhavr/electrum-reden/
 
 Files: *
 Copyright: Electrum Team

@@ -12,7 +12,7 @@ import argparse
 version = imp.load_source('version', 'lib/version.py')
 
 if sys.version_info[:3] < (3, 4, 0):
-    sys.exit("Error: Electrum-DASH requires Python version >= 3.4.0...")
+    sys.exit("Error: Electrum-REDEN requires Python version >= 3.4.0...")
 
 data_files = []
 
@@ -28,12 +28,12 @@ if platform.system() in ['Linux', 'FreeBSD', 'DragonFly']:
         else:
             usr_share = os.path.expanduser('~/.local/share')
     data_files += [
-        (os.path.join(usr_share, 'applications/'), ['electrum-dash.desktop']),
-        (os.path.join(usr_share, 'pixmaps/'), ['icons/electrum-dash.png'])
+        (os.path.join(usr_share, 'applications/'), ['electrum-reden.desktop']),
+        (os.path.join(usr_share, 'pixmaps/'), ['icons/electrum-reden.png'])
     ]
 
 setup(
-    name="Electrum-DASH",
+    name="Electrum-REDEN",
     version=version.ELECTRUM_VERSION,
     install_requires=[
         'pyaes>=0.1a1',
@@ -48,28 +48,28 @@ setup(
         'x11_hash>=1.4',
     ],
     packages=[
-        'electrum_dash',
-        'electrum_dash_gui',
-        'electrum_dash_gui.qt',
-        'electrum_dash_plugins',
-        'electrum_dash_plugins.audio_modem',
-        'electrum_dash_plugins.cosigner_pool',
-        'electrum_dash_plugins.email_requests',
-        'electrum_dash_plugins.hw_wallet',
-        'electrum_dash_plugins.keepkey',
-        'electrum_dash_plugins.labels',
-        'electrum_dash_plugins.ledger',
-        'electrum_dash_plugins.trezor',
-        'electrum_dash_plugins.digitalbitbox',
-        'electrum_dash_plugins.virtualkeyboard',
+        'electrum_reden',
+        'electrum_reden_gui',
+        'electrum_reden_gui.qt',
+        'electrum_reden_plugins',
+        'electrum_reden_plugins.audio_modem',
+        'electrum_reden_plugins.cosigner_pool',
+        'electrum_reden_plugins.email_requests',
+        'electrum_reden_plugins.hw_wallet',
+        'electrum_reden_plugins.keepkey',
+        'electrum_reden_plugins.labels',
+        'electrum_reden_plugins.ledger',
+        'electrum_reden_plugins.trezor',
+        'electrum_reden_plugins.digitalbitbox',
+        'electrum_reden_plugins.virtualkeyboard',
     ],
     package_dir={
-        'electrum_dash': 'lib',
-        'electrum_dash_gui': 'gui',
-        'electrum_dash_plugins': 'plugins',
+        'electrum_reden': 'lib',
+        'electrum_reden_gui': 'gui',
+        'electrum_reden_plugins': 'plugins',
     },
     package_data={
-        'electrum_dash': [
+        'electrum_reden': [
             'servers.json',
             'servers_testnet.json',
             'currencies.json',
@@ -78,12 +78,12 @@ setup(
             'locale/*/LC_MESSAGES/electrum.mo',
         ]
     },
-    scripts=['electrum-dash'],
+    scripts=['electrum-reden'],
     data_files=data_files,
-    description="Lightweight Dashpay Wallet",
+    description="Lightweight Redenpay Wallet",
     maintainer="akhavr",
     maintainer_email="akhavr@khavr.com",
     license="MIT License",
-    url="https://electrum.dash.org",
-    long_description="""Lightweight Dashpay Wallet"""
+    url="https://electrum.reden.org",
+    long_description="""Lightweight Redenpay Wallet"""
 )

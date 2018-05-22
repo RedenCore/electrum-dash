@@ -46,8 +46,8 @@ from . import rsakey
 
 from .bitcoin import TYPE_ADDRESS
 
-REQUEST_HEADERS = {'Accept': 'application/dash-paymentrequest', 'User-Agent': 'Electrum-DASH'}
-ACK_HEADERS = {'Content-Type':'application/dash-payment','Accept':'application/dash-paymentack','User-Agent':'Electrum-DASH'}
+REQUEST_HEADERS = {'Accept': 'application/reden-paymentrequest', 'User-Agent': 'Electrum-REDEN'}
+ACK_HEADERS = {'Content-Type':'application/reden-payment','Accept':'application/reden-paymentack','User-Agent':'Electrum-REDEN'}
 
 ca_path = requests.certs.where()
 ca_list = None
@@ -75,9 +75,9 @@ def get_payment_request(url):
         try:
             response = requests.request('GET', url, headers=REQUEST_HEADERS)
             response.raise_for_status()
-            # Guard against `dash:`-URIs with invalid payment request URLs
+            # Guard against `reden:`-URIs with invalid payment request URLs
             if "Content-Type" not in response.headers \
-            or response.headers["Content-Type"] != "application/dash-paymentrequest":
+            or response.headers["Content-Type"] != "application/reden-paymentrequest":
                 data = None
                 error = "payment URL not pointing to a payment request handling server"
             else:
@@ -266,7 +266,7 @@ class PaymentRequest:
         paymnt.transactions.append(bfh(raw_tx))
         ref_out = paymnt.refund_to.add()
         ref_out.script = util.bfh(transaction.Transaction.pay_script(TYPE_ADDRESS, refund_addr))
-        paymnt.memo = "Paid using Electrum-DASH"
+        paymnt.memo = "Paid using Electrum-REDEN"
         pm = paymnt.SerializeToString()
         payurl = urllib.parse.urlparse(pay_det.payment_url)
         try:

@@ -1,6 +1,6 @@
 #!/usr/bin/make -f
 
-export PYBUILD_NAME=electrum-dash
+export PYBUILD_NAME=electrum-reden
 
 %:
 	dh $@ --with python3 --buildsystem=pybuild
@@ -14,11 +14,11 @@ override_dh_auto_build::
 
 override_dh_auto_install::
 	dh_auto_install
-	mkdir -p debian/electrum-dash/usr/bin \
-             debian/electrum-dash/usr/share
-	mv debian/python3-electrum-dash/usr/bin \
-       debian/electrum-dash/usr
-	mv debian/python3-electrum-dash/usr/share/applications \
-       debian/electrum-dash/usr/share
-	mv debian/python3-electrum-dash/usr/share/pixmaps \
-       debian/electrum-dash/usr/share
+	mkdir -p debian/electrum-reden/usr/bin \
+             debian/electrum-reden/usr/share
+	mv debian/python3-electrum-reden/usr/bin \
+       debian/electrum-reden/usr
+	mv debian/python3-electrum-reden/usr/share/applications \
+       debian/electrum-reden/usr/share
+	mv debian/python3-electrum-reden/usr/share/pixmaps \
+       debian/electrum-reden/usr/share

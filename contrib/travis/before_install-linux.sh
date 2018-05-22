@@ -6,5 +6,5 @@ if [[ -z $TRAVIS_TAG ]]; then
   exit 1
 fi
 
-docker pull zebralucky/electrum-dash-winebuild:Linux
-docker pull zebralucky/electrum-dash-winebuild:Wine
+docker pull zebralucky/electrum-reden-winebuild:Linux
+docker pull zebralucky/electrum-reden-winebuild:Wine

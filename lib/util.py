@@ -40,7 +40,7 @@ def inv_dict(d):
     return {v: k for k, v in d.items()}
 
 
-base_units = {'DASH':8, 'mDASH':5, 'uDASH':2}
+base_units = {'REDEN':8, 'mREDEN':5, 'uREDEN':2}
 fee_levels = [_('Within 25 blocks'), _('Within 10 blocks'), _('Within 5 blocks'), _('Within 2 blocks'), _('In the next block')]
 
 def normalize_version(v):
@@ -233,7 +233,7 @@ def android_data_dir():
     return PythonActivity.mActivity.getFilesDir().getPath() + '/data'
 
 def android_headers_dir():
-    d = android_ext_dir() + '/org.dash.electrum.electrum_dash'
+    d = android_ext_dir() + '/org.reden.electrum.electrum_reden'
     if not os.path.exists(d):
         os.mkdir(d)
     return d
@@ -242,7 +242,7 @@ def android_check_data_dir():
     """ if needed, move old directory to sandbox """
     ext_dir = android_ext_dir()
     data_dir = android_data_dir()
-    old_electrum_dir = ext_dir + '/electrum-dash'
+    old_electrum_dir = ext_dir + '/electrum-reden'
     if not os.path.exists(data_dir) and os.path.exists(old_electrum_dir):
         import shutil
         new_headers_path = android_headers_dir() + 'blockchain_headers'
@@ -323,11 +323,11 @@ def user_dir():
     if 'ANDROID_DATA' in os.environ:
         return android_check_data_dir()
     elif os.name == 'posix':
-        return os.path.join(os.environ["HOME"], ".electrum-dash")
+        return os.path.join(os.environ["HOME"], ".electrum-reden")
     elif "APPDATA" in os.environ:
-        return os.path.join(os.environ["APPDATA"], "Electrum-DASH")
+        return os.path.join(os.environ["APPDATA"], "Electrum-REDEN")
     elif "LOCALAPPDATA" in os.environ:
-        return os.path.join(os.environ["LOCALAPPDATA"], "Electrum-DASH")
+        return os.path.join(os.environ["LOCALAPPDATA"], "Electrum-REDEN")
     else:
         #raise Exception("No home directory found in environment variables.")
         return
@@ -427,16 +427,16 @@ def time_difference(distance_in_time, include_seconds):
         return "over %d years" % (round(distance_in_minutes / 525600))
 
 mainnet_block_explorers = {
-    'Dash.org': ('https://explorer.dash.org',
+    'Reden.org': ('https://explorer.reden.org',
                        {'tx': 'tx', 'addr': 'address'}),
-    'Bchain.info': ('https://bchain.info/DASH',
+    'Bchain.info': ('https://bchain.info/REDEN',
                        {'tx': 'tx', 'addr': 'addr'}),
     'system default': ('blockchain:',
                        {'tx': 'tx', 'addr': 'address'}),
 }
 
 testnet_block_explorers = {
-    'Dash.org': ('https://test.insight.dash.siampm.com',
+    'Reden.org': ('https://test.insight.reden.siampm.com',
                        {'tx': 'tx', 'addr': 'address'}),
     'system default': ('blockchain:',
                        {'tx': 'tx', 'addr': 'address'}),
@@ -447,7 +447,7 @@ def block_explorer_info():
     return testnet_block_explorers if bitcoin.NetworkConstants.TESTNET else mainnet_block_explorers
 
 def block_explorer(config):
-    return config.get('block_explorer', 'Dash.org')
+    return config.get('block_explorer', 'Reden.org')
 
 def block_explorer_tuple(config):
     return block_explorer_info().get(block_explorer(config))
@@ -472,12 +472,12 @@ def parse_URI(uri, on_pr=None):
 
     if ':' not in uri:
         if not bitcoin.is_address(uri):
-            raise BaseException("Not a Dash address")
+            raise BaseException("Not a Reden address")
         return {'address': uri}
 
     u = urllib.parse.urlparse(uri)
-    if u.scheme != 'dash':
-        raise BaseException("Not a Dash URI")
+    if u.scheme != 'reden':
+        raise BaseException("Not a Reden URI")
     address = u.path
 
     # python for android fails to parse query
@@ -494,7 +494,7 @@ def parse_URI(uri, on_pr=None):
     out = {k: v[0] for k, v in pq.items()}
     if address:
         if not bitcoin.is_address(address):
-            raise BaseException("Invalid Dash address:" + address)
+            raise BaseException("Invalid Reden address:" + address)
         out['address'] = address
     if 'amount' in out:
         am = out['amount']
@@ -544,7 +544,7 @@ def create_URI(addr, amount, message):
         query.append('amount=%s'%format_satoshis_plain(amount))
     if message:
         query.append('message=%s'%urllib.parse.quote(message))
-    p = urllib.parse.ParseResult(scheme='dash', netloc='', path=addr, params='', query='&'.join(query), fragment='')
+    p = urllib.parse.ParseResult(scheme='reden', netloc='', path=addr, params='', query='&'.join(query), fragment='')
     return urllib.parse.urlunparse(p)
 
 

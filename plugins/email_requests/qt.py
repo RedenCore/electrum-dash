@@ -40,11 +40,11 @@ from PyQt5.QtCore import *
 import PyQt5.QtGui as QtGui
 from PyQt5.QtWidgets import (QVBoxLayout, QLabel, QGridLayout, QLineEdit)
 
-from electrum_dash.plugins import BasePlugin, hook
-from electrum_dash.paymentrequest import PaymentRequest
-from electrum_dash.i18n import _
-from electrum_dash_gui.qt.util import EnterButton, Buttons, CloseButton
-from electrum_dash_gui.qt.util import OkButton, WindowModalDialog
+from electrum_reden.plugins import BasePlugin, hook
+from electrum_reden.paymentrequest import PaymentRequest
+from electrum_reden.i18n import _
+from electrum_reden_gui.qt.util import EnterButton, Buttons, CloseButton
+from electrum_reden_gui.qt.util import OkButton, WindowModalDialog
 
 
 class Processor(threading.Thread):
@@ -72,7 +72,7 @@ class Processor(threading.Thread):
                 p = [p]
                 continue
             for item in p:
-                if item.get_content_type() == "application/dash-paymentrequest":
+                if item.get_content_type() == "application/reden-paymentrequest":
                     pr_str = item.get_payload()
                     pr_str = base64.b64decode(pr_str)
                     self.on_receive(pr_str)
@@ -91,10 +91,10 @@ class Processor(threading.Thread):
         msg['Subject'] = message
         msg['To'] = recipient
         msg['From'] = self.username
-        part = MIMEBase('application', "dash-paymentrequest")
+        part = MIMEBase('application', "reden-paymentrequest")
         part.set_payload(payment_request)
         encode_base64(part)
-        part.add_header('Content-Disposition', 'attachment; filename="payreq.dash"')
+        part.add_header('Content-Disposition', 'attachment; filename="payreq.reden"')
         msg.attach(part)
         s = smtplib.SMTP_SSL(self.imap_server, timeout=2)
         s.login(self.username, self.password)
@@ -143,7 +143,7 @@ class Plugin(BasePlugin):
         menu.addAction(_("Send via e-mail"), lambda: self.send(window, addr))
 
     def send(self, window, addr):
-        from electrum_dash import paymentrequest
+        from electrum_reden import paymentrequest
         r = window.wallet.receive_requests.get(addr)
         message = r.get('memo', '')
         if r.get('signature'):

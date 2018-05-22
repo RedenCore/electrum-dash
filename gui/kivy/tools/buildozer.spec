@@ -1,13 +1,13 @@
 [app]
 
 # (str) Title of your application
-title = Electrum-DASH
+title = Electrum-REDEN
 
 # (str) Package name
-package.name = Electrum_DASH
+package.name = Electrum_REDEN
 
 # (str) Package domain (needed for android/ios packaging)
-package.domain = org.dash.electrum
+package.domain = org.reden.electrum
 
 # (str) Source code where the main.py live
 source.dir = .
@@ -38,7 +38,7 @@ requirements = python3crystax, android, openssl, plyer, kivy==1.10.0, x11_hash
 presplash.filename = %(source.dir)s/icons/electrum_presplash.png
 
 # (str) Icon of the application
-icon.filename = %(source.dir)s/icons/electrum-dash.png
+icon.filename = %(source.dir)s/icons/electrum-reden.png
 
 # (str) Supported orientation (one of landscape, portrait or all)
 orientation = portrait
@@ -93,7 +93,7 @@ android.add_src = gui/kivy/data/java-classes/
 
 android.gradle_dependencies = me.dm7.barcodescanner:zxing:1.9.8
 
-android.add_activities = org.dash.electrum.qr.SimpleScannerActivity
+android.add_activities = org.reden.electrum.qr.SimpleScannerActivity
 
 # (str) python-for-android branch to use, if not master, useful to try
 # not yet merged features.

@@ -4,10 +4,10 @@ from PyQt5.QtGui import *
 from PyQt5.QtCore import *
 from PyQt5.QtWidgets import *
 
-from electrum_dash.i18n import _
-from electrum_dash.masternode_budget import BudgetProposal, BudgetVote
-from electrum_dash.masternode_manager import BUDGET_FEE_CONFIRMATIONS
-from electrum_dash.util import block_explorer_URL, print_error, format_satoshis_plain
+from electrum_reden.i18n import _
+from electrum_reden.masternode_budget import BudgetProposal, BudgetVote
+from electrum_reden.masternode_manager import BUDGET_FEE_CONFIRMATIONS
+from electrum_reden.util import block_explorer_URL, print_error, format_satoshis_plain
 
 from .amountedit import BTCAmountEdit
 from . import util
@@ -20,7 +20,7 @@ MY_ADDRESS_COLOR = '#80ff80'
 def budget_explorer_url(item_type, identifier):
     """Get the URL for a budget proposal explorer."""
     if item_type == 'proposal':
-        return 'https://dashwhale.org/p/%s' % identifier
+        return 'https://redenwhale.org/p/%s' % identifier
 
 class ProposalsModel(QAbstractTableModel):
     """Model of budget proposals."""
@@ -232,7 +232,7 @@ class ProposalsTab(QWidget):
         self.unsubmitted_proposals = []
 
         description = ''.join(['You can create a budget proposal below. ',
-                'Proposals require 5 DASH to create. ',
+                'Proposals require 5 REDEN to create. ',
                 'Your proposal can be submitted once the collateral transaction has enough confirmations.'])
         description = QLabel(_(description))
         description.setWordWrap(True)
@@ -265,7 +265,7 @@ class ProposalsTab(QWidget):
         form.addRow(_('Number of Payments:'), self.payments_count_edit)
         form.addRow(_('Starting Block:'), self.start_block_edit)
         form.addRow(_('Payment Address:'), self.address_edit)
-        form.addRow(_('Monthly DASH Payment:'), self.amount_edit)
+        form.addRow(_('Monthly REDEN Payment:'), self.amount_edit)
 
         vbox = QVBoxLayout()
         vbox.addWidget(self.tree)
